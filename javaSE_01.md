@@ -190,3 +190,18 @@ short ss=1;ss+=1;		//正常   s = (short)(s+1);
 	
 
 ### main的详细解释
+* public  被jvm调用，所以权限要足够大
+* static  被jvm调用，不需要创建独享，直接类名.调用即可
+* void	  被jvm调用，不需要有任何返回值
+* main    只有这样写才能被jvm识别,main不是关键字
+* string[] args:以前是用来接受键盘录入的
+
+### 类说明书
+* 对工具类加入文档注释
+	* @author (作者信息)
+	* @version 版本信息
+	* @param   参数信息
+	* @return  返回值
+	* @param   参数名称，形式参数的变量名称
+* 通过javadoc命令生成说明书
+	* javadoc -d 指定生成的文件目录 -author -version ArrayTool.java 
