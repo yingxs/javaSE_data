@@ -14,7 +14,7 @@ public class Array {
 	 * 数组的有参构造函数
 	 * @param capacity 数组的容量
 	 */
-	public void  Array(int capacity){
+	public Array(int capacity){
 		this.data = new int[capacity];
 		this.size = 0;
 	}
@@ -91,7 +91,41 @@ public class Array {
 		data[index] = e;
 		size++;
 	}
+	/**
+	 * 获取index索引位置的元素
+	 * @param index 要获取的元素的索引
+	 * @return 返回获取到的元素
+	 */
+	public int get(int index){
+		if(index < 0 || index >= size)
+			throw new IllegalArgumentException("Get failed.Index is illegal");
+		return data[index];
+	}
+	
+	/**
+	 * 修改index索引位置的元素为e
+	 * @param index 要修改的元素的索引
+	 * @param e	该修改为的元素
+	 */
+	void set(int index,int e){
+		if(index < 0 || index >= size)
+			throw new IllegalArgumentException("Get failed.Index is illegal");
+		data[index] = e;
+	}
 	
 	
+	@Override
+	public String toString(){
+		StringBuilder res = new StringBuilder();
+		res.append(String.format("Array:size = %d , capcity = %d\n",size,data.length));
+		res.append('[');
+		for(int i = 0 ; i < size ; i++){
+			res.append(data[i]);
+			if( i != size-1 )
+				res.append(", ");
+		}
+		res.append(']');
+		return res.toString();
+	}
 	
 }
