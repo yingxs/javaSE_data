@@ -5,12 +5,13 @@ import com.yingxs.data_structure.array.Array;
 public class Test {
 
 	public static void main(String[] args) {
-		test1();
+//		test1();
+		test2();
 			
 	}
 	
 	public static void test1(){
-		Array arr = new Array(20);
+		Array<Integer> arr = new Array<Integer>(20);
 		for(int i = 0 ; i < 10 ; i++)
 			arr.addLast(i);
 		System.out.println(arr);
@@ -32,6 +33,15 @@ public class Test {
 		System.out.println(arr);
 		
 		
+	}
+	
+	
+	public static void test2(){
+		Array<Student> arr = new Array<Student>();
+		arr.addLast(new Student("Alice",100));
+		arr.addLast(new Student("Bob",66));
+		arr.addLast(new Student("Charlie",88));
+		System.out.println(arr);
 	}
 
 }

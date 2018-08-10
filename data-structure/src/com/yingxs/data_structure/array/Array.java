@@ -5,9 +5,9 @@ package com.yingxs.data_structure.array;
  * @author yingxs
  *
  */
-public class Array {
+public class Array<E> {
 
-	private int[] data;
+	private  E[] data;
 	private int size;
 	
 	/**
@@ -15,7 +15,7 @@ public class Array {
 	 * @param capacity 数组的容量
 	 */
 	public Array(int capacity){
-		this.data = new int[capacity];
+		this.data = (E[]) new Object[capacity];
 		this.size = 0;
 	}
 	
@@ -23,7 +23,7 @@ public class Array {
 	 * 数组的无参构造函数，数组容量默认是10
 	 */
 	public Array(){
-		this.data = new int[10];
+		this.data = (E[]) new Object[10];
 		this.size = 0;
 	}
 
@@ -59,7 +59,7 @@ public class Array {
 	 * 在数组开头添加一个新元素
 	 * @param e 要插入的元素
 	 */
-	public void addFirst(int e){
+	public void addFirst(E e){
 		this.add(0,e);
 	}
 	
@@ -67,7 +67,7 @@ public class Array {
 	 * 在数组末尾添加一个新元素
 	 * @param e 要插入的元素
 	 */
-	public void addLast(int e){
+	public void addLast(E e){
 		this.add(size,e);
 	}
 	
@@ -76,7 +76,7 @@ public class Array {
 	 * @param index 要插入的位置的索引
 	 * @param e	要插入的元素
 	 */
-	public void add(int index,int e){
+	public void add(int index,E e){
 		if(size == data.length)		//判断数组是否已满
 			throw new IllegalArgumentException("AddLast failed. Array is full.");
 
@@ -96,7 +96,7 @@ public class Array {
 	 * @param index 要获取的元素的索引
 	 * @return 返回获取到的元素
 	 */
-	public int get(int index){
+	public E get(int index){
 		if(index < 0 || index >= size)
 			throw new IllegalArgumentException("Get failed.Index is illegal");
 		return data[index];
@@ -107,7 +107,7 @@ public class Array {
 	 * @param index 要修改的元素的索引
 	 * @param e	该修改为的元素
 	 */
-	void set(int index,int e){
+	void set(int index,E e){
 		if(index < 0 || index >= size)
 			throw new IllegalArgumentException("Get failed.Index is illegal");
 		data[index] = e;
@@ -118,9 +118,9 @@ public class Array {
 	 * @param e 
 	 * @return 存在就返回true,反之返回false
 	 */
-	public boolean contains(int e){
+	public boolean contains(E e){
 		for(int i = 0 ;i < size ; i++){
-			if(data[i] == e)
+			if(data[i].equals(e))
 				return true;
 		}
 		return false;
@@ -131,9 +131,9 @@ public class Array {
 	 * @param e
 	 * @return
 	 */
-	public int find(int e){
+	public int find(E e){
 		for(int i = 0 ;i < size ; i++){
-			if(data[i] == e)
+			if(data[i].equals(e))
 				return i;
 		}
 		return -1;
@@ -144,15 +144,15 @@ public class Array {
 	 * @param index 索引
 	 * @return 删除的元素
 	 */
-	public int remove(int index){
+	public E remove(int index){
 		if(index < 0 || index >= size)
 			throw new IllegalArgumentException("Remove failed.Index is illegal");
 
-		int ret = data[index];
+		E ret = data[index];
 		for(int i = index+1 ; i < size ; i++)
 			data[i-1] = data[i];
-		
 		size--;
+		data[size] = null;
 		return ret;
 	
 	}
@@ -161,7 +161,7 @@ public class Array {
 	 * 删除数组中第一个元素，并将删除的元素返回
 	 * @return
 	 */
-	public int removeFirst(){
+	public E removeFirst(){
 		return remove(0);
 	}
 	
@@ -169,12 +169,15 @@ public class Array {
 	 * 删除数组中最后一个元素，并将删除的元素返回
 	 * @return
 	 */
-	public int removeLast(){
+	public E removeLast(){
 		return remove(size-1);
 	}
 	
-	
-	public void removeElement(int e){
+	/**
+	 * 从数组中删除元素e,有就删除，数组中不存在该元素，就什么也不做
+	 * @param e
+	 */
+	public void removeElement(E e){
 		int index = find(e);
 		if(index != -1)
 			remove(index);
