@@ -77,13 +77,14 @@ public class Array<E> {
 	 * @param e	要插入的元素
 	 */
 	public void add(int index,E e){
-		if(size == data.length)		//判断数组是否已满
-			throw new IllegalArgumentException("AddLast failed. Array is full.");
-
+		
 		
 		if(index < 0 || index > size )		//元素必须紧跟排列，中间不能有空格
 			throw new IllegalArgumentException("AddLast failed. Require index >=0 and index <= size.");
 
+		if(size == data.length)		//判断数组是否已满
+			resize(2 * data.length);
+		
 		//其后元素后移
 		for(int i = size - 1 ;i >= index ; i--)
 			data[i + 1] = data[i];
@@ -153,6 +154,13 @@ public class Array<E> {
 			data[i-1] = data[i];
 		size--;
 		data[size] = null;
+		
+		if(size == data.length / 2)
+			resize(data.length / 2);
+		
+		
+		
+		
 		return ret;
 	
 	}
@@ -196,6 +204,13 @@ public class Array<E> {
 		}
 		res.append(']');
 		return res.toString();
+	}
+	
+	private void resize(int newCapacity){
+		E[] newData = (E[])new Object[newCapacity];
+		for(int i = 0 ; i < size ;i++)
+			newData[i] = data[i];
+		data = newData;
 	}
 	
 }

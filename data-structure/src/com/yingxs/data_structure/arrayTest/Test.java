@@ -5,13 +5,13 @@ import com.yingxs.data_structure.array.Array;
 public class Test {
 
 	public static void main(String[] args) {
-//		test1();
-		test2();
+		test1();
+//		test2();
 			
 	}
 	
 	public static void test1(){
-		Array<Integer> arr = new Array<Integer>(20);
+		Array<Integer> arr = new Array<Integer>(10);
 		for(int i = 0 ; i < 10 ; i++)
 			arr.addLast(i);
 		System.out.println(arr);
