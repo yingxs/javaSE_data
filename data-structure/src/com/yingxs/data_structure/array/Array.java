@@ -103,6 +103,25 @@ public class Array<E> {
 		return data[index];
 	}
 	
+	
+	/**
+	 * 获取数组末尾元素
+	 * @return
+	 */
+	public E getLast(){
+		return get(size-1);
+	}
+	
+	/**
+	 * 获取数组第一个元素
+	 * @return
+	 */
+	public E getFirst(){
+		return get(0);
+	}
+	
+	
+	
 	/**
 	 * 修改index索引位置的元素为e
 	 * @param index 要修改的元素的索引

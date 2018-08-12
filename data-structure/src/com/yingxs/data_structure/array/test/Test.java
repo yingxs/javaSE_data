@@ -1,4 +1,4 @@
-package com.yingxs.data_structure.arrayTest;
+package com.yingxs.data_structure.array.test;
 
 import com.yingxs.data_structure.array.Array;
 
