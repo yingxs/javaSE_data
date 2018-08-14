@@ -1,7 +1,5 @@
 package com.yingxs.data_structure.queue;
 
-import java.util.Arrays;
-
 public class LoopQueue<E> implements Queue<E> {
 	
 	private E[] data;
@@ -23,7 +21,7 @@ public class LoopQueue<E> implements Queue<E> {
 	}
 	
 	/**
-	 * 获取队列中元素数量
+	 * 获取队列中元素数量	   O(1)
 	 */
 	@Override
 	public int getSize() {
@@ -31,7 +29,7 @@ public class LoopQueue<E> implements Queue<E> {
 	}
 	
 	/**
-	 * 判断队列是否为空
+	 * 判断队列是否为空	 O(1)
 	 */
 	@Override
 	public boolean isEmpty() {
@@ -39,7 +37,7 @@ public class LoopQueue<E> implements Queue<E> {
 	}
 	
 	/**
-	 * 入队
+	 * 入队   	O(1)均摊
 	 */
 	@Override
 	public void enqueue(E e) {
@@ -53,7 +51,7 @@ public class LoopQueue<E> implements Queue<E> {
 	
 	
 	/**
-	 * 出队
+	 * 出队		O(1)均摊
 	 */
 	@Override
 	public E dequeue() {
@@ -82,7 +80,7 @@ public class LoopQueue<E> implements Queue<E> {
 	}
 	
 	/**
-	 * 查看对首元素
+	 * 查看对首元素		O(1)
 	 */
 	@Override
 	public E getFront() {
