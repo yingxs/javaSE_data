@@ -415,3 +415,146 @@ private			Y
 默认				Y				Y
 protected		Y				Y							Y
 public 			Y				Y							Y				Y
+
+
+### 内部类
+
+内部类访问特点：
+* 内部类可以直接访问外部类的成员，包括私有
+* 外部类要访问内部类的成员，必须创建对象
+* 外部类名.内部类名 变量名 =  外部类对象.内部类对象
+
+
+```
+class Demo1_InnerClass {
+	public static void main(String[] args){
+		Outer.Inner oi = new Outer().new Inner();	//创建内部类对象
+	}
+}
+
+class Outer {
+	class Inner {
+		public void method(){
+			System.out.println("Hello World!");
+		}
+	}
+}
+```
+
+### 成员内部类私有
+```
+
+public class Test {
+	public static void main(String[] args) {
+//		Outer.Inner oi = new Outer().new Inner();
+//		oi.method();
+		
+		Outer o = new Outer();
+		o.print();
+	}
+	
+}
+
+
+class Outer {
+	private int num = 10;
+	private class Inner {
+		public void method(){
+			System.out.println("Hello World!");
+		}
+	}
+	
+	
+	public void print(){
+		Inner i = new Inner();
+		i.method();
+	}
+}
+```
+
+
+### 静态成员内部类
+```
+
+public class Test {
+	public static void main(String[] args) {
+		//外部类名.内部类名 对象名 = 外部类名.内部类对象
+		Outer.Inner oi = new Outer.Inner();
+		oi.method();
+		
+		Outer.Inner2.print();
+	}
+	
+}
+
+
+class Outer {
+	static class Inner {
+		public void method(){
+			System.out.println("method");
+		}
+	}
+	static class Inner2 {
+		public static void print(){
+			System.out.println("print");
+		}
+	}
+}
+```
+
+### 题目
+```
+
+public class Test {
+	public static void main(String[] args) {
+		Outer.Inner oi = new Outer().new Inner();
+		oi.show();
+		
+	}
+	
+}
+
+
+class Outer {
+//内部类之所以能获取到外部类的成员，是因为他能获取到外部类的引用 -> 外部类名.this
+	public int num = 10;
+	class Inner {
+		public int num = 20;
+		public void show(){
+			int num = 30;
+			System.out.println(num);
+			System.out.println(this.num);
+			System.out.println(Outer.this.num);
+		}
+	}
+
+}
+```
+
+### 局部内部类访问局部变量
+* 局部内部类访问局部变量必须用final修饰
+* 局部内部类在访问它所在的方法中的局部变量时，局部变量必须用final修饰,为什么？
+	* 因为当调用这个方法时，局部变量如果没有用final修饰，他的生命周期和它的方法的生命周期是一样的，当方法弹栈，这个局部变量也会消失 ，那么如果局部内部类对象还没有马上消失想用这个局部变量，而这个变量已经没有了，如果用final修饰会在类加载的时候进入常量池，即使方法弹栈，常量池的常量还在，也可以继续使用，但是jdk1.8没有这个要求
+```
+public class Test {
+	public static void main(String[] args) {
+		Outer o = new Outer();
+		o.method();
+	}
+	
+}
+
+class Outer {
+	public void method(){
+		final int num = 10;
+		class Inner {
+			public void print(){
+				System.out.println(num);
+			}
+		}
+		
+		Inner i = new Inner();
+		i.print();
+	}
+}
+```
