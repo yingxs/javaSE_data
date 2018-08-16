@@ -1,7 +1,7 @@
 package com.yingxs.data_structure.linkedList;
 /**
  * 增删改查时间复杂度为O(n),但是如果只对链表头进行操作的话时间复杂度就是O(1)
- * 由此可见，链表只适合增删链表头元素，不要去修改，只差链表头元素O(1)
+ * 由此可见，链表只适合增删链表头元素，不要去修改，只查询链表头元素O(1)
  * @author admin
  * @param <E>
  */

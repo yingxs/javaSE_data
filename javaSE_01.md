@@ -558,3 +558,153 @@ class Outer {
 	}
 }
 ```
+
+
+### 匿名内部类
+* 匿名内部类是局部内部类的一种，因此匿名内部类必须写在方法中
+* 本质：
+	* 是一个继承了该类或者实现了该接口的子类匿名对象 
+```
+//非匿名的内部类
+public class Test {
+	public static void main(String[] args) {
+		Outer o = new Outer();
+		o.method();
+	}
+	
+}
+
+interface Inter {
+	public void print();
+}
+
+
+class Outer {
+	class Inner implements Inter {
+		public void print(){
+			System.out.println("print");
+		}
+	}
+	
+	public void method(){
+		Inner i = new Inner();
+		i.print();
+	}
+	
+	
+}
+```
+
+
+```
+//匿名内部类
+public class Test {
+	public static void main(String[] args) {
+		Outer o = new Outer();
+		o.method();
+	}
+	
+}
+
+interface Inter {
+	public void print();
+}
+
+
+class Outer {
+	class Inner implements Inter {
+		public void print(){
+			System.out.println("print1");
+		}
+	}
+	
+	public void method(){
+//		Inner i = new Inner();
+//		i.print();
+		new Inter(){			//实现Inter接口,Inter的子类对象
+			public void print() {
+				System.out.println("print");//重写抽象方法
+			}
+		}.print();
+		
+	}
+	
+	
+}
+```
+
+### 匿名内部类重写多个方法调用
+```
+
+public class Test {
+	public static void main(String[] args) {
+		Outer o = new Outer();
+		o.method();
+	}
+	
+}
+
+interface Inter {
+	public void show1();
+	public void show2();
+}
+
+//匿名内部类最好只针对重写一个方法的时候使用
+class Outer {
+	public void method(){
+		Inter i  = new Inter(){			//实现Inter接口,Inter的子类对象,父类引用指向子类对象，弊端：无法使用子类特有的方法
+			public void show1() {
+				System.out.println("show1");
+			}
+			public void show2() {
+				System.out.println("show2");
+			}
+			/*public void show3() {
+				System.out.println("show3");
+			}*/
+			
+			
+		};
+		
+		i.show1();
+		i.show2();
+//		i.show3();		//匿名内部类是不能向下转型的，因为没有子类类名
+		
+	}
+	
+	
+}
+```
+
+### 匿名内部类在开发中的应用
+```
+
+public class Test {
+	public static void main(String[] args) {
+		//如何使用PersonDemo中的method方法呢
+		PersonDemo pd = new PersonDemo();
+		pd.method(new Person(){			//匿名内部类当做参数传递(本质把匿名内部类当做一个对象)
+			public void show() {
+				System.out.println("show");
+			}
+		});
+	}
+	
+}
+
+//这里写抽象类，接口都行
+abstract class Person {
+	public abstract void show();
+}
+
+class PersonDemo {
+	public void method(Person p){
+		p.show();
+	}
+}
+```
+
+### 题目
+```
+
+```
