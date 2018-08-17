@@ -29,6 +29,16 @@ public class Solution {
 		
 		return head;
 	}
+	
+	
+	public static void main(String[] args) {
+		int[] nums = {1,2,6,3,4,5,6};
+		ListNode head = new ListNode(nums);
+		System.out.println(head);
+		
+		ListNode res =  new Solution2().removeElements(head, 6);
+		System.out.println(res);
+	}
 }
 /**
  * 使用虚拟头结点
@@ -61,6 +71,55 @@ class ListNode {
 	public int val;
 	public ListNode next;
 	public ListNode(int x){
+		val = x;
+	}
+	/**
+	 * 使用arr作为参数，创建一个链表，当前的ListNode为链表的头结点
+	 * @param arr
+	 */
+	public ListNode(int[] arr){
+		if(arr == null || arr.length == 0)
+			throw new IllegalArgumentException("arr can not be empty");
+		this.val = arr[0];
+		ListNode cur = this;
+		for(int i = 1 ; i < arr.length ; i ++){
+			cur.next = new ListNode(arr[i]);
+			cur = cur.next;
+		}
 		
 	}
+	
+	/**
+	 * 以当前节点为头结点的链表信息字符串
+	 */
+	@Override
+	public String toString() {
+		StringBuilder res = new StringBuilder();
+		ListNode cur = this;
+		while(cur != null){
+			res.append(cur.val + "->");
+			cur = cur.next;
+		}
+		res.append("NULL");
+		return res.toString();
+	}
+	
+	
+	
+	
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
