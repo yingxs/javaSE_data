@@ -8,8 +8,6 @@ package com.yingxs.data_structure.linkedList;
 public class Solution {
 	public ListNode removeElements(ListNode head , int val){
 		while(head != null && head.val == val){
-//			ListNode delNode = head;
-//			delNode.next = null;
 			head = head.next;
 		}
 		if(head == null)
@@ -18,9 +16,6 @@ public class Solution {
 		ListNode prev = head;
 		while(prev.next != null){
 			if(prev.next.val == val){
-//				ListNode delNode = prev.next;
-//				prev.next = delNode.next;
-//				delNode.next = null;
 				prev.next = prev.next.next;
 			}else{
 				prev = prev.next;
@@ -36,7 +31,7 @@ public class Solution {
 		ListNode head = new ListNode(nums);
 		System.out.println(head);
 		
-		ListNode res =  new Solution().removeElements(head, 6);
+		ListNode res =  new Solution3().removeElements(head, 6);
 		System.out.println(res);
 	}
 }
@@ -63,6 +58,28 @@ public class Solution {
 		return dummyHead.next;
 	}
 }
+ 
+ 
+ class Solution3 {
+	 public ListNode removeElements(ListNode head , int val){
+		if(head == null)
+			return null;
+		/*
+		ListNode res = removeElements(head.next, val);
+		if(head.val == val)
+			return res;
+		else{
+			head.next = res;
+			return head;
+		}
+		*/
+		head.next = removeElements(head.next, val);
+		
+		return head.val == val ? head.next :head;
+		
+		
+	 }
+ }
 
 
 
