@@ -79,3 +79,14 @@ addLast				O(n)
 removeLast 			O(n)
 出现该问题的原因是:removeLast时resize操作过于着急(Eager),解决方案是
 采用一种懒惰一点的方案进行解决，当size == capacity/4时，才将capacity减半
+
+
+
+
+## 递归
+### 本质上，将原来的问题，转换为更小的问题
+#### 举例：数组求和
+* Sum( arr[0...n-1] ) = arr[0]+Sum( arr[1...n-1] )
+* Sum( arr[1...n-1] ) = arr[1]+Sum( arr[2...n-1] )
+* ...
+* Sum( arr[n-1...n-1] ) = arr[n-1]+Sum([])
