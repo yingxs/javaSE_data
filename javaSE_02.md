@@ -221,3 +221,52 @@
 	* 类中必须重写hasCode()和equels()方法
 	* hasCode():属性相同的对象返回值必须相同，属性不同的返回值尽量不同(提高效率)
 	* equels():属性相同返回true,属性不同返回false,返回false的时候存储   
+
+### LinkedHashSet
+* 底层由链表实现，是set集合中唯一一个能保证怎么存就怎么取的集合对象
+* 因为是HashSet的 子类，所以也是保证元素唯一的， 与HashSet的原理一样
+
+
+## TreeSet集合
+* TreeSet是用来对元素进行排序的，它也可以保证元素的唯一
+* 在TreeSet集合中如何存取元素取决于compareTo方法的返回值
+* 被排序类实现Comparable接口并重写compareTo方法
+	* 当compareTo方法返回0的时候集合中只有一个元素
+	* 当compareTo方法返回正数的时候集合怎么存怎么取
+	* 当compareTo方法返回负数的时候集合倒序存储
+	
+### TreeSet集合排序原理
+> 在TreSet集合中如何存储元素取决于compareTo()方法返回值,小的存储在左边(负数),大的存储在右边(正数)，相等就不存(0)
+
+![](http://www.yingxs.com/img/TreeSet.png)
+
+----------
+
+![](http://www.yingxs.com/img/TreeSet2.png)
+
+----------
+
+![](http://www.yingxs.co m/img/TreeSet3.png)
+
+
+
+## TreeSet比较器排序
+> 需求：将字符串按照长度排序
+
+```
+//默认是按照字典顺序排的，传入比较器，自定义排序
+TreeSet<String> ts = new TreeSet(new CompareByLen())<>;
+ts.add("aaaaaa");
+ts.add("fasdf");
+ts.add("asd");
+ts.add("fadfadfa");
+System.out.println(ts)
+```
+```
+class CompareByLen implements Comparator<String>{
+	public int compare(String s1,String s2){		//按照字符串的长度比较
+	int num = s1.length()-s2.length();				//长度为主要条件
+		return num == 0 ? s1.compareTo(s2) : num;	//内容为次要条件
+	}
+}
+```
