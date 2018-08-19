@@ -35,16 +35,23 @@ public class Bst<E extends Comparable<E>> {
 	}
 	
 	/**
-	 * 向二分搜索树中添加新的元素e
+	 * 向二分搜索树中添加新的元素e,返回树的根
 	 * @param e
 	 */
 	public void add(E e){
-		if(root == null){
+		
+		/*if(root == null){
 			root = new Node(e);
 			size++;
 		}else{
 			add(root ,e);
-		}
+		}*/
+		
+		root = add(root,e);
+		
+		
+		
+		
 	}
 	
 	/**
@@ -52,7 +59,8 @@ public class Bst<E extends Comparable<E>> {
 	 * @param node
 	 * @param e
 	 */
-	private void add(Node node,E e){
+	private Node add(Node node,E e){
+		/*
 		if(e.equals(node.e))			   //要插入的元素在树中已经存在
 			return ;
 		else if(e.compareTo(node.e) < 0 && node.left == null){  //插入到当前元素的左子树
@@ -64,11 +72,20 @@ public class Bst<E extends Comparable<E>> {
 			size++;
 			return ;
 		}
+		*/
+		
+		if(node == null){
+			size++;
+			return new Node(e);
+		}
+		
 		
 		if( e.compareTo(node.e) < 0)
-			add(node.left,e);
-		else
-			add(node.right,e);
+			node.left = add(node.left,e);
+		else if( e.compareTo(node.e) > 0)
+			node.right = add(node.right,e);
+		
+		return node;
 		
 	}
 	
