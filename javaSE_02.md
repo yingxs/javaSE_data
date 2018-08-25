@@ -270,3 +270,34 @@ class CompareByLen implements Comparator<String>{
 	}
 }
 ```
+
+## map
+#### map接口和Collection接口的不同
+* map是双列集合的根接口，Collection是单列结合的跟接口
+* Map的键是唯一的，Collection的子体系Set是唯一的
+* MAp集合的数据结构针对键有效，根治无关；Collection集合的数据结构针对元素有效
+* 单例集合底层依赖双列集合
+
+
+### Map功能
+#### 添加
+* V put (K Key , V value)添加元素
+	* 相同的键不存储，只进行指覆盖，把覆盖的值返回,也就是说，如果存入的键在集合中不存在，那么返回null，当键在原本集合中存在时，覆盖值并返回被覆盖的值
+
+#### 删除功能
+* void clear()移除所有的键值对元素
+* V remove(Object key)根据键删除键值对元素，并把值返回
+
+#### 判断功能
+* boolean containsKey(Object Key)判断集合是否包含指定的键
+* boolean containsVal(Object value)判断集合是否包含指定的值
+* Boolean isEmpty()判断集合是否为空
+
+#### 获取功能
+* Set<Map.Entry<K,V>> entryset();
+* V get(Object key)根据值获取键
+* Set(K) keySet()获取集合中所有值的集合
+* Collection<V> values()获取集合中所有值的集合
+
+#### 长度功能
+* int size（）返回集合中的键值对的个数
