@@ -152,20 +152,15 @@
 		* List<?> list = new ArrayList<Interger>();
 		* 当右边的泛型是不确定时，左边可以指定为？ 	
 	* ？ extends E
-		* 向下限定，E及其子类
+		* 向下限定，E及其子类，泛型固定上边界，放进去
 	* ？ super E
-		* 向上限定，E及其父类
+		* 向上限定，E及其父类，泛型固定下边界，拿出来
 
 
 
 
 ## 增强型for循环
-> 简化数组和Collection集合遍历
-> 底层依赖迭代器
-
-### 格式：
-* for(元素数据类型 变量 ： 数组或者Collection集合){
-	* 使用变量即可，该变量就是元素
+> 简化数组和Collection集合遍历 素
 * }
 * 
 
@@ -360,3 +355,10 @@ Map.Entry<String,Integer> en = it.next();	//父类引用指向子类对象
 Entry<String,Integer> en = it.next();		//直接获取的是子类对象
 //Entry是Map.Entry的子类
 ```
+
+
+###LinkedHashMap
+> 底层链表实现，保证怎么存就怎么取
+
+### TreeMap集合
+> 键实现比较器类 或者 向TreeMap的构造中传入比较器，类似TreeSet
