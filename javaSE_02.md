@@ -301,3 +301,62 @@ class CompareByLen implements Comparator<String>{
 
 #### 长度功能
 * int size（）返回集合中的键值对的个数
+
+
+### map的遍历
+```
+//Map集合遍历之键找值
+Map<String,Integer> map = new HashMap<>();
+map.put("张三",23);
+map.put("李四",24);
+map.put("王五",25);
+map.put("赵六",26);
+
+/*
+Set<String> keyset = map.keySet();
+Iterator<String> it = keyset.iterator();
+while(it.hasNext()){
+	String key = it.next();
+	Integer value = map.get(key);
+	System.out.println(key + "=" + value);
+
+}*/
+
+for(String key : map.keySet()){
+	System.out.println(key+"="+map.get(key));
+	
+}
+
+```
+
+```
+//Map集合遍历之键值对对象找键和值
+Map<String,Integer> map = new HashMap<>();
+map.put("张三",23);
+map.put("李四",24);
+map.put("王五",25);
+map.put("赵六",26);
+
+
+//Map.Entry说明Entry是Map的内部接口，将键值对封装成Entry对象，存储在Set集合中
+/*Set<Map.Entry<String,Integer>> entrySet = map.entrySet();
+Iterator<Map.Entry<String,Integer>> it = entrySet.iterator();
+while(it.hasNext()){
+	Map.Entry<String,Integer> en = it.next();
+	String key = en.getKey();
+	Integer value = en.getValue();
+	System.out.println(key + "=" +value);
+}*/
+
+for(Map.Entry<String,Integer> en : map.entrySet()){
+	System.out.println(en.getKey()+"="+en.getValue());
+
+}
+
+```
+
+```
+Map.Entry<String,Integer> en = it.next();	//父类引用指向子类对象
+Entry<String,Integer> en = it.next();		//直接获取的是子类对象
+//Entry是Map.Entry的子类
+```
