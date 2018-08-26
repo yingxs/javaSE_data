@@ -124,6 +124,7 @@ public class Bst<E extends Comparable<E>> {
 		preOrder(root);
 	}
 	
+	
 	/**
 	 * 前序遍历以node为根的二分搜索树，递归算法
 	 * @param node
@@ -137,6 +138,50 @@ public class Bst<E extends Comparable<E>> {
 		preOrder(node.left);
 		preOrder(node.right);
 	}
+	
+	
+	/**
+	 * 中序遍历
+	 */
+	public void inOrder(){
+		inOrder(root);
+	}
+	
+	
+	/**
+	 * 中序遍历以node为根的二分搜索树，递归算法
+	 * @param node
+	 */
+	private void inOrder(Node node){
+		if(node == null)
+			return ;
+		
+		inOrder(node.left);
+		System.out.println(node.e);
+		inOrder(node.right);
+	}
+	
+	/**
+	 * 二分搜索树的后序遍历
+	 */
+	public void postOrder(){
+		postOrder(root);
+	}
+	
+	/**
+	 * 后续遍历以node为根的二分搜索树，递归算法
+	 * @param node
+	 */
+	private void postOrder(Node node) {
+		
+		if(node == null)
+			return ;
+		
+		postOrder(node.left);
+		postOrder(node.right);
+		System.out.println(node.e);
+		
+	}
 
 	@Override
 	public String toString() {
@@ -145,6 +190,13 @@ public class Bst<E extends Comparable<E>> {
 		return res.toString();
 	}
 	
+	
+	/**
+	 * 递归遍历以node为根节点，层级为depth的树
+	 * @param node
+	 * @param depth
+	 * @param res
+	 */
 	private void generateBSTString(Node node,int depth,StringBuilder res){
 		
 		if(node == null ){
@@ -158,7 +210,11 @@ public class Bst<E extends Comparable<E>> {
 		
 	}
 	
-	
+	/**
+	 * 根据层级打印线段
+	 * @param depth
+	 * @return
+	 */
 	private String generateDepthString(int depth){
 		StringBuilder res = new StringBuilder();
 		for(int i = 0 ;i < depth ; i++)
