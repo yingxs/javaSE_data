@@ -9,17 +9,19 @@ public class Test {
 		int[] nums = {5,3,6,8,4,2};
 		for(int num :nums)
 			bst.add(num);
-				
-		bst.preOrder();
-				
-				
-		System.out.println();
+			
+		bst.levelOrder();
+//		bst.preOrder();
+//				
+//				
+//		System.out.println();
+//		bst.preOrderNR();
 		
-		bst.inOrder();
-		
-		System.out.println();
-		
-		bst.postOrder();
+//		bst.inOrder();
+//		
+//		System.out.println();
+//		
+//		bst.postOrder();
 //		System.out.println(bst);
 		
 	}

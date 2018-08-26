@@ -1,5 +1,9 @@
 package com.yingxs.data_structure.bst;
 
+import java.util.LinkedList;
+import java.util.Queue;
+import java.util.Stack;
+
 public class Bst<E extends Comparable<E>> {
 	
 	/**
@@ -139,6 +143,25 @@ public class Bst<E extends Comparable<E>> {
 		preOrder(node.right);
 	}
 	
+	/**
+	 * 二分搜索树的非递归前序遍历
+	 */
+	public void preOrderNR(){
+		Stack<Node> stack = new Stack<Node>();
+		stack.push(root);
+		while(!stack.isEmpty()){
+			Node cur = stack.pop();
+			System.out.println(cur.e);
+			
+			if( cur.right != null )
+				stack.push(cur.right);
+			
+			if( cur.left != null)
+				stack.push(cur.left);
+		}
+	}
+	
+	
 	
 	/**
 	 * 中序遍历
@@ -181,6 +204,23 @@ public class Bst<E extends Comparable<E>> {
 		postOrder(node.right);
 		System.out.println(node.e);
 		
+	}
+	
+	/**
+	 * 二分搜索树的层序遍历
+	 */
+	public void levelOrder(){
+		Queue<Node> q = new LinkedList<Node>();
+		q.add(root);
+		while(!q.isEmpty()){
+			Node cur = q.remove();
+			System.out.println(cur.e);
+			
+			if(cur.left!=null)
+				q.add(cur.left);
+			if(cur.right!=null)
+				q.add(cur.right);
+		}
 	}
 
 	@Override
