@@ -59,3 +59,28 @@
 	* finalize是一个方法，当垃圾回收期确定不存在对该对象的更多引用时，由垃圾回收期调用此方法
 	
 
+### 自定义异常
+> 通过名字区分到底是什么一场，有针对得到解决
+
+
+```
+class AgeOutofBoundsException extends Exception {
+	/*访问父类的构造*/
+	public AgeOutofBoundsException（）{
+		super();
+	}
+
+	public AgeOutofBoundsException（String message）{
+		super(message);
+	}
+}
+
+//throw new AgeOutofBoundsException("年龄非法");
+
+
+```
+
+### 异常的注意事项
+* 子类重写父类方法式，子类的方法必须抛出相同的异常或者父类异常的子类
+* 如果父类抛出多个异常，子类重写父类时，只能抛出相同异常或者他的子集，子类不能抛出父类没有的异常
+* 如果被重写得到方法没有抛出异常，那么子类的方法绝对不可以抛出异常，如果子类方法内有异常发生，那么子类只能try..catch不能throws
