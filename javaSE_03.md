@@ -84,3 +84,49 @@ class AgeOutofBoundsException extends Exception {
 * 子类重写父类方法式，子类的方法必须抛出相同的异常或者父类异常的子类
 * 如果父类抛出多个异常，子类重写父类时，只能抛出相同异常或者他的子集，子类不能抛出父类没有的异常
 * 如果被重写得到方法没有抛出异常，那么子类的方法绝对不可以抛出异常，如果子类方法内有异常发生，那么子类只能try..catch不能throws
+
+
+
+## File类
+### 常用构造
+* File(String pathname)根据一个路径得到File对象
+* File(String parent,String child)根据一个目录和一个子文件/目录得到File对象
+* File(File parent,String child)根据一个File对象和一个子文件/目录得到File对象
+
+
+### 常用方法
+#### 创建功能
+* public boolean createNewFile()创建文件，如果存在就不创建了
+* public boolean mkdir()创建文件夹，如果存在就不创建
+* public boolean mkdirs()创建文件夹，如果父文件夹不存在，会帮你创建出类
+#### 重命名和删除功能
+* public boolean renameTo(File dest)把文件重弄命名为指定的文件路径
+	* 如果路径名相同，就是改名
+	* 如果路径名不同，就是改名并剪切
+* public boolean delete()删除文件或文件夹
+* 
+
+
+#### 判断功能
+* public boolean isDirectory()判断是否是目录
+* public boolean isFile()判断是否是文件
+* public boolean exists()判断文件或目录是否存在
+* public boolean canReand()判断是否可读
+* public boolean canWrite()判断是否可写
+* public boolean isHidden()判断师是否隐藏
+* 
+
+
+#### 获取功能
+* public String getAbsolutePath()获取绝对路径
+* public String getPath()获取构造方法中传入的路径
+* public String getName()获取名称
+* public long length()获取长度，字节数
+* public long lastModified()获取最后一次修改事件，毫秒值
+* public String[] list()获取指定目录下所有文件或者文件夹的名称数组
+* public File[] listFiles()获取指定目录下的所有文件或者文件夹的File数组
+* boolean setReadable()设置为是否可读(windows认为一切文件可读，无论设置true还是false都是可读，但在linux中不一样)
+*  boolean setWritable()设置为是否可写
+
+#### 文件名过滤器
+![](http://yingxs.com/img/filenamefilter.png)
