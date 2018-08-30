@@ -26,3 +26,16 @@
 	
 * 小数组拷贝
 	![](http://yingxs.com/img/copyimg3.png)
+
+
+### BufferInputStream
+![](http://yingxs.com/img/bufferinputstream1.png)
+* 原理图
+![](http://yingxs.com/img/bufferinputstream2.png)
+
+
+### flush()和close()的区别
+* close()
+	* 具备刷新的功能 ，在关闭流之前会刷新一次缓冲区，将缓冲区剩余的字节全都刷新到文件上，再关闭流；close()方法刷新完之后就不能再写入了
+* flush()
+	* 具备刷新的功能，刷完之后还可以继续写 
