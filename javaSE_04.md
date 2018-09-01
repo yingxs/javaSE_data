@@ -244,3 +244,24 @@ fw.close();
 		
 ```
 
+### 带缓冲区的字符流
+* BufferedReader的read()方法读取字符时回一次读取若干字符到缓冲区，然后逐个返回给程序，降低读取文件的次数，提高效率
+* BufferedWriter的write()方法写出字符时会先写到缓冲区，缓冲区写满时才会写到文件，降低写文件的次数，提高效率
+
+```
+BufferedReader br = new BufferedReader(new FileReader("xxx.txt"));
+BufferedWriter bw = new BufferedWriter(new FileWriter("xxx.txt"));
+
+int c;
+while( (c = br.read()) != -1 ){
+	bw.write(c);
+}
+
+br.close();
+bw.close();
+		
+```
+
+### readLine()和newLine()方法
+* BufferedReader的readLine()方法可以读取一行字符(不包含换行符),读取到末尾时返回null
+* BufferedWriter的newLine()可以输出一个跨平台的换行符号"\r\n"
