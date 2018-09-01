@@ -337,3 +337,21 @@ class HeimaStudent implements Coder{
 }
 
 ```
+
+### InputStreamReader && OutputStreamWriter
+* InputStreamReader 字节流通向字符流的桥梁，可由指定的编码表读取字节并将其解码为字符
+* OutputStreamWriter 字符流通向字节流的桥梁，由指定的编码表将要写入流中的字符编码成字节
+```
+public static void main(String[] args) throws IOException {
+	InputStreamReader isr = new InputStreamReader(new FileInputStream("utf-8.txt"), "utf-8");		//指定码表读字符
+	OutputStreamWriter osw = new OutputStreamWriter(new FileOutputStream("gbk.txt"),"gbk");			//指定码表写字符		
+	int c;
+	while( (c = isr.read()) != -1){
+		osw.write(c);
+	}
+	
+	isr.close();
+	osw.close();
+}
+```
+![](http://yingxs.com/img/zhuanhuanliu.png)
