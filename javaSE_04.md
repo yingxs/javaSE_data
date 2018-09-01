@@ -206,3 +206,41 @@ fw.write("字符串！！！")；
 fw.write(97);		//a
 fw.close();
 ```
+
+
+### 字符流拷贝
+```
+FileReader fr = new FileReader("xxx.txt");
+FileWriter fw = new FileWriter("zzz.txt");
+
+int c;
+while((c = fr.read()) != -1){ 			//通过项目默认的码表一次读取一个字符
+	fw.write(c);
+}
+
+fr.close();
+fw.close();				//Writer类中有一个2k的缓冲区，如果不关流就不会将缓冲区内容写入
+```
+
+> 字符流也可以拷贝文本文件，但不推荐使用，因为读取时会把字节转为字符，写出时还要把字符转回字节
+> 程序需要读取一短文本，或者需要写出一段文本的时候可以使用字符流
+> 读取的时候可以按照字符的大小读取，不会出现半个中文
+> 写出的时候可以直接将字符串写出，不用转换为字节数组
+
+
+```
+//小数组拷贝
+FileReader fr = new FileReader("xxx.txt");
+FileWriter fw = new FileWriter("zzz.txt");
+
+char[] arr = new char[1024];
+int len;
+while( (len = fr.read(arr)) != -1 ){		//将文件上的数据读取到字符数组中
+	fw.write(arr,0,len);					//将字符数组中的数据写到文件上
+}
+
+fr.close();
+fw.close();
+		
+```
+
