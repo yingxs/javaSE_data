@@ -177,3 +177,32 @@ public static void main(String[] args) throws IOException {
 	
 }
 ```
+
+
+### 字符流
+* 字符流是什么
+	* 字符流就是可以直接读写字符的IO流
+	* 字符流读取字符，就是先读取到字节数据，然后转为字符，如果要写出字符，需要把字符转换为字节再写出
+	
+#### FileReader & FileWriter
+```
+//文件读取流读取字符
+public static void main(String[] args) throws IOException {
+	
+	FileReader fr = new FileReader("xxx.txt");
+	int c;
+	
+	while((c = fr.read()) != -1){ 			//通过项目默认的码表一次读取一个字符
+		System.out.println((char)c);
+	}
+	
+	fr.close();
+	
+}
+```
+```
+FileWriter fw = new FileWriter("yyy.txt");
+fw.write("字符串！！！")；
+fw.write(97);		//a
+fw.close();
+```
