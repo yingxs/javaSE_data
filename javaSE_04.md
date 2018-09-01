@@ -265,3 +265,20 @@ bw.close();
 ### readLine()和newLine()方法
 * BufferedReader的readLine()方法可以读取一行字符(不包含换行符),读取到末尾时返回null
 * BufferedWriter的newLine()可以输出一个跨平台的换行符号"\r\n"
+
+
+### LineNumberReader(BufferedReader的子类对象)
+```
+public static void main(String[] args) throws IOException {
+	
+	LineNumberReader lnr = new LineNumberReader(new FileReader("zzz.txt"));
+	String line;
+//		lnr.setLineNumber(100);  readLine()一次,行号自增1
+	while( (line = lnr.readLine()) != null) {
+		System.out.println(lnr.getLineNumber()+":"+line);
+	}
+	
+	lnr.close();
+}
+	
+```
