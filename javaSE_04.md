@@ -355,3 +355,70 @@ public static void main(String[] args) throws IOException {
 }
 ```
 ![](http://yingxs.com/img/zhuanhuanliu.png)
+
+### 统计文本文件中各个字符个数
+```
+//统计字符个数
+public class Test {
+	
+	public static void main(String[] args) throws IOException {
+		//1.创建带缓冲区的输入流对象
+		BufferedReader br = new BufferedReader(new FileReader("zzz.txt"));
+		//2.创建双列集合对象TreeMap
+		TreeMap<Character,Integer> tm = new TreeMap<Character,Integer>();
+		
+		int ch;
+		while( (ch = br.read()) != -1 ){
+			char c = (char)ch;
+			if(!tm.containsKey(c)){
+				tm.put(c, 1);
+			}else{
+				tm.put(c,tm.get(c)+1);
+			}
+		}
+		
+		br.close();
+		
+		BufferedWriter bw = new BufferedWriter(new FileWriter("times.txt"));
+		for(Character key : tm.keySet()) {
+			switch (key){
+				case '\t':
+					bw.write("\\t" + "=" + tm.get(key));
+					break;
+				case '\n':
+					bw.write("\\n" + "=" + tm.get(key));
+					break;
+				case '\r':
+					bw.write("\\r" + "=" + tm.get(key));
+					break;
+			default:
+				bw.write(key + "=" + tm.get(key));
+				break;
+			}
+			
+			
+			bw.newLine();
+		}
+		
+		bw.close();
+	}
+	
+}
+```
+
+```
+//试用版软件
+public static void main(String[] args) throws IOException {
+	BufferedReader br = new BufferedReader(new FileReader("config.txt"));
+	String line = br.readLine();
+	int times = Integer.parseInt(line);
+	if(times > 0){
+		System.out.println("你还有" + times-- + "次机会");
+		FileWriter fw = new FileWriter("config.txt");
+		fw.write(times+"");
+		fw.close();
+	}else{
+		System.out.println("你的使用次数已到，请购买正版！");
+	}
+}
+```
