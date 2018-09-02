@@ -422,3 +422,74 @@ public static void main(String[] args) throws IOException {
 	}
 }
 ```
+
+### 序列流
+> 序列流可以把多个字节输入流整合成一个，从序列流中读取数据时，将从被整合的第一个流开始读，读完第一个继续读第二个，以此类推
+```
+//整合两个
+FileInputStream fis1 = new FileInputStream("a.txt");
+FileInputStream fis2 = new FileInputStream("b.txt");
+SequenceInputStream sis = new SequenceInputStream(fis1, fis2);
+FileOutputStream fos = new FileOutputStream("c.txt");
+
+int b;
+while( (b=sis.read()) != -1){
+	fos.write(b);
+}
+sis.close();					//sis在关闭的时候，会将构造方法中传入的流对象也关闭
+fos.close();
+```
+
+```
+//整合多个
+FileInputStream fis1 = new FileInputStream("a.txt");
+FileInputStream fis2 = new FileInputStream("b.txt");
+FileInputStream fis3 = new FileInputStream("c.txt");
+
+Vector<FileInputStream> v = new Vector<FileInputStream>();
+v.add(fis1);
+v.add(fis2);
+v.add(fis3);
+
+Enumeration<FileInputStream> en = v.elements();
+SequenceInputStream sis = new SequenceInputStream(en);		//将枚举中的输入流整合成一个
+FileOutputStream fos = new FileOutputStream("d.txt");
+
+int b;
+while( (b = sis.read()) != -1 ){
+	fos.write(b);
+}
+
+
+sis.close();
+fos.close();
+		
+```
+
+### 内存输出流ByteArrayOutputStream
+* 1.什么是内存输出流
+	* 该输出流可以向内存中写数据，把内存当做一个缓冲区，写出之后可以一次性获取所有数据
+* 2.使用方式
+	* 创建对象：new ByteArrayOutputStream();
+	* 写出数据：write(int i),write(byte[] b)
+	* 获取数据：toByteArray() ,toSTring() 
+
+```
+
+	FileInputStream fis = new FileInputStream("d.txt");
+	ByteArrayOutputStream baos = new ByteArrayOutputStream();		//在内存中创建了可以增长的内存数组
+	
+	int b;
+	while( (b = fis.read()) != -1 ){
+		baos.write(b);												//将读取到的数据逐个写到内存中
+	}
+	
+	
+	byte[] arr = baos.toByteArray();							//将缓冲区的数据全部获取出来，并赋值给arr数组
+	System.out.println(new String(arr));
+	
+	System.out.println(baos.toString()); 						//将缓冲区中的数据转换为字符串
+	
+	fis.close();
+		
+```
