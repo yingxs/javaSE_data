@@ -493,3 +493,73 @@ fos.close();
 	fis.close();
 		
 ```
+
+
+### 对象操作流(ObjectOutputStream)
+* 什么是对象操作流
+	* 该流可以将一个对象写出，获取读取一个对象到程序中，也就是执行了序列化和反序列化的操作 
+	```
+		public class Test {
+			
+			public static void main(String[] args) throws IOException {
+				Person p1 = new Person("张三", 23);
+				Person p2 = new Person("李四", 24);
+				
+				
+				ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("e.txt"));
+				oos.writeObject(p1);
+				oos.writeObject(p2);
+				
+				oos.close();
+			}
+			
+		}
+		
+		class Person implements Serializable {
+			private String name;
+			private int age;
+			public Person() {
+				super();
+			}
+			public Person(String name, int age) {
+				super();
+				this.name = name;
+				this.age = age;
+			}
+			public String getName() {
+				return name;
+			}
+			public void setName(String name) {
+				this.name = name;
+			}
+			public int getAge() {
+				return age;
+			}
+			public void setAge(int age) {
+				this.age = age;
+			}
+			@Override
+			public String toString() {
+				return "Person [name=" + name + ", age=" + age + "]";
+			}
+			
+		}
+
+	```
+
+### 对象输入流(ObjectInputStream)
+```
+public static void main(String[] args) throws IOException, ClassNotFoundException {
+		
+		ObjectInputStream ois = new ObjectInputStream(new FileInputStream("e.txt"));
+		
+		Person p1 = (Person) ois.readObject();
+		Person p2 = (Person) ois.readObject();
+//		Person p3 = (Person) ois.readObject();				//当文件读取到末尾时出现EOFException
+		
+		System.out.println(p1);
+		System.out.println(p2);
+		
+		ois.close();
+	}
+```
