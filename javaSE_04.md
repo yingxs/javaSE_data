@@ -622,3 +622,17 @@ public static void main(String[] args) throws IOException, ClassNotFoundExceptio
 		is.close();
 		ps.close();
 	```
+
+### 键盘录入的两种方式
+```
+BufferedReader br = new BufferedReader(new InputStreamReader(System.in));		//InputStreamReader转换流
+String line = br.readLine();
+System.out.println(line);
+br.close();
+```
+
+```
+Scanner sc = new Scanner(System.in);
+String line = sc.nextLine();
+System.out.println(line);
+```
