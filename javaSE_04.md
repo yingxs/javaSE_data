@@ -588,3 +588,37 @@ public static void main(String[] args) throws IOException, ClassNotFoundExceptio
 	``` 
 * PrintStream和PrintWriter分别是打印字节流和打印字符流
 * 只操作数据目的
+
+
+### 标准输入流和输出流
+* 1.什么是标准输入输出流
+	* System.in是InputStream,标准输入流，默认可以从键盘输入字节数据
+	* System.out是PrintStream,标准输出流，默认可以向控制台输入字符或字节数据
+	```
+		InputStream is = System.in;
+		int x = is.read();
+		System.out.println(x);
+		
+		//is.close();	无需关闭
+		
+		InputStream is2 = System.in;
+		int y = is.read();
+		System.out.println(y);
+	```
+* 2.修改标准输入输出流
+	* 修改输入流：System.setIn(InputStream)
+	* 修改输出流：System.setOut(PrintStream) 
+	```
+		System.setIn(new FileInputStream("a.txt"));			//改变标准输入流
+		System.setOut(new PrintStream("b.txt"));			//改变标准输出流
+		
+		InputStream is = System.in;							//获取标准输入流，默认指向键盘，改变后指向a.txt
+		PrintStream ps = System.out;						//获取标准输出流，默认指向控制台，改变后指向b.txt
+		int b;
+		while((b = is.read()) != -1){
+			ps.write(b);
+		}
+		
+		is.close();
+		ps.close();
+	```
