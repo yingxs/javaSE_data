@@ -563,3 +563,28 @@ public static void main(String[] args) throws IOException, ClassNotFoundExceptio
 		ois.close();
 	}
 ```
+
+
+### 打印流
+* 什么是打印流
+	* 该流可以很方便的将对象的toString()结果输出，并且自动加上换行，而且是使用自动刷出的模式
+	* System.out就是一个PrintStream,其默认向控制台输出信息
+	```
+		System.out.println("aaa");
+		PrintStream ps = System.out;
+		ps.println(97);						//通过Interger.toString()将97转换成字符串并打印
+		ps.write(97);						//输出 a		查找码表
+		
+		ps.close();
+	``` 
+* 自动刷出
+	* 自动刷出只针对println方法
+	```
+	PrintWriter pw = new PrintWriter(new FileOutputStream("f.txt"),true);
+	//	pw.println(97);
+		pw.write(97);
+			
+	//	pw.close();
+	``` 
+* PrintStream和PrintWriter分别是打印字节流和打印字符流
+* 只操作数据目的
