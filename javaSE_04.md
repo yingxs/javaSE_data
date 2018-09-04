@@ -636,3 +636,22 @@ Scanner sc = new Scanner(System.in);
 String line = sc.nextLine();
 System.out.println(line);
 ```
+
+### 修改标准输入输出流拷贝图片
+```
+System.setIn(new FileInputStream("a.jpg"));
+System.setOut(new PrintStream("b.jpg"));
+
+InputStream is = System.in;
+PrintStream ps = System.out;
+
+byte[] arr = new byte[1024];
+
+int len;
+while( (len = is.read(arr)) != -1 ) {
+	ps.write(arr,0,len);
+}
+
+is.close();
+ps.close();
+```
