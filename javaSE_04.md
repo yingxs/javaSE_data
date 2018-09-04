@@ -655,3 +655,22 @@ while( (len = is.read(arr)) != -1 ) {
 is.close();
 ps.close();
 ```
+
+
+### 随机访问流
+* 随机访问流的概述
+	* RandomAccessFile类不属于流，是Object的子类，但它融合了InputStream和OutputStream的功能
+	* 支持随机访问文件的读取和写入 
+	* read(),write(),seek()
+
+```
+		RandomAccessFile raf = new RandomAccessFile("g.txt", "rw");
+//		raf.write(97);
+//		int x = raf.read();
+//		System.out.println(x);
+	
+		raf.seek(10);		//在指定位置设置指针
+		raf.write(98);
+		
+		raf.close();
+```
