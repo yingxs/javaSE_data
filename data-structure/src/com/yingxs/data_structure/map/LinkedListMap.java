@@ -87,6 +87,7 @@ public class LinkedListMap<K, V> implements Map<K,V> {
 	
 	
 	public V remove(K key){
+		
 		Node prev = dummyHead;
 		while(prev.next != null){
 			if(prev.next.key.equals(key))
