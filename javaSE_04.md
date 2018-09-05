@@ -674,3 +674,57 @@ ps.close();
 		
 		raf.close();
 ```
+
+
+### 数据输入输出流
+* 1.什么是数据输入输出流
+	* DataInputStream,DataOutputStream可以按照基本数据类型大小读写数据
+	* 例如按Long大小写出一个数字，写出的时候该数据占据8个字节，读取的时候也可以按照Long类型读取，一次读取8个字节
+```
+/*
+DataOutputStream dos = new DataOutputStream(new FileOutputStream("h.txt"));
+dos.writeInt(997);
+dos.writeInt(998);
+dos.writeInt(999);
+
+dos.close();
+*/
+
+DataInputStream dis = new DataInputStream(new FileInputStream("h.txt"));
+int x = dis.readInt();
+int y = dis.readInt();
+int z = dis.readInt();
+
+System.out.println(x);
+System.out.println(y);
+System.out.println(z);
+``` 
+
+### Properties
+* public Object setProperty(String key,String value) 
+* public String getProperty(String key)
+* public Enumeration<String> stringPropertyNames()
+
+```
+Properties prop = new Properties();
+prop.setProperty("name", "张三");
+prop.setProperty("tel", "189123456789");
+
+//System.out.println(prop);
+Enumeration<String> en = (Enumeration<String>) prop.propertyNames();
+while(en.hasMoreElements()){
+	String key = en.nextElement();
+	String value = prop.getProperty(key);
+	System.out.println(key + "=" + value);
+}
+```
+
+#### Properties关联文件
+```
+Properties prop = new Properties();
+prop.load(new FileInputStream("config.properties"));			//将文件上的键值对对象读取到集合中
+prop.setProperty("tel", "12345678910");							//只修改了内存中prop对象的值，并没有改变文件上的值
+prop.store(new FileOutputStream("config.properties"),null);		//第二个参数是描述，可以给出描述字符串，也可以给null,但是默认会加上时间
+
+System.out.println(prop);
+```
