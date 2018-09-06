@@ -107,4 +107,29 @@ class MyRunnable implements Runnable  {						//1.定义一个类实现Runnable
 * 实现Runnable接口
 	* 即使自己定义的线程类有了父类也没有关系，因为有了父类也可以实现接口，而且接口是可以多实现的
 	* 不能直接使用Thread中的方法需要先获取到线程对象后，才能得到Thread的方法，代码复杂   
-	  
+
+### 匿名内部类实现多线程
+```
+//继承Thread
+new Thread(){										//1.继承Thread类
+	@Override											
+	public void run() {								//2.重写run方法
+		for(int i = 0 ; i < 1000 ; i++){			//3.将要执行的代码写在run方法中
+			System.out.println("aaaaaa");
+		}
+	}
+}.start();											//4.开启线程
+	
+```
+
+```
+//实现Runnable接口
+new Thread(new Runnable(){							//1.将Runnable的子类对象传递给Thread构造方法
+	public void run() {								//2.重写run方法
+		for(int i = 0 ; i < 1000 ; i++){			//3.将要执行的代码写在run方法中	
+			System.out.println("bb");		
+		}
+	}
+}).start();											//4.开启线程
+		
+```
