@@ -360,3 +360,187 @@ t2.setPriority(Thread.MAX_PRIORITY);		//设置最大的线程优先级
 t1.start();
 t2.start();
 ```
+
+### 同步代码块
+* 1.什么情况下需要同步
+	* 当多线程并发，有多段代码同时执行时，我们希望某一段代码执行的过程中CPU不要切换到其他线程工作，这时就需要同步代码块
+	* 如果两段代码是同步的,那么同一时间只能执行一段，在一段代码没有执行结束之前，不会执行另外一段代码
+* 2.同步代码块
+	* 使用synchronized关键字加上一个所对象来定义一段代码，这就叫同步代码块
+	* 多个同步代码块如果使用相同的锁对象，那他们就是同步的 
+	
+```
+
+public class Test {
+	
+	public static void main(String[] args) throws InterruptedException  {
+		
+		final Printer p = new Printer();
+		new Thread(){
+			public void run() {
+				while(true){
+					p.print1();
+				}
+			};
+		}.start();
+		
+		new Thread(){
+			public void run() {
+				while(true){
+					p.print2();
+				}
+			};
+		}.start();
+		
+	}
+	
+}
+
+class Printer {
+	Demo d = new Demo();
+	
+	public void print1() {
+		//synchronized (new Demo()) {						
+		synchronized (d) {									//同步代码块，锁机制，锁对象可以是任意的
+			System.out.print("y");
+			System.out.print("i");
+			System.out.print("n");
+			System.out.print("g");
+			System.out.print("x");
+			System.out.print("s");
+			System.out.println();
+		}
+		
+	}
+	public void print2() {
+		//synchronized (new Demo()) {						//锁对象不能用匿名对象，因为匿名对象不是同一个对象
+		synchronized (d) {
+			System.out.print(".");
+			System.out.print("c");
+			System.out.print("o");
+			System.out.print("m");
+			System.out.println();
+		}
+		
+	}
+}
+
+
+class Demo{}
+
+
+``` 
+
+### 同步方法
+```
+//非静态的同步方法
+public class Test {
+	
+	public static void main(String[] args) throws InterruptedException  {
+		
+		final Printer p = new Printer();
+		new Thread(){
+			public void run() {
+				while(true){
+					p.print1();
+				}
+			};
+		}.start();
+		
+		new Thread(){
+			public void run() {
+				while(true){
+					p.print2();
+				}
+			};
+		}.start();
+		
+	}
+	
+}
+
+class Printer {
+	Demo d = new Demo();
+	//非静态的同步方法锁对象是this
+	public synchronized void print1() {						//同步方法只需要在方法上加上synchronized关键字即可
+			System.out.print("y");
+			System.out.print("i");
+			System.out.print("n");
+			System.out.print("g");
+			System.out.print("x");
+			System.out.print("s");
+			System.out.println();
+		
+	}
+	public void print2() {
+		synchronized (this) {
+			System.out.print(".");
+			System.out.print("c");
+			System.out.print("o");
+			System.out.print("m");
+			System.out.println();
+		}
+		
+	}
+}
+
+class Demo{}
+
+```
+
+```
+//静态的同步方法
+public class Test {
+	
+	public static void main(String[] args) throws InterruptedException  {
+		
+		final Printer p = new Printer();
+		new Thread(){
+			public void run() {
+				while(true){
+					p.print1();
+				}
+			};
+		}.start();
+		
+		new Thread(){
+			public void run() {
+				while(true){
+					p.print2();
+				}
+			};
+		}.start();
+		
+	}
+	
+}
+
+class Printer {
+	Demo d = new Demo();
+	//非静态的同步方法锁对象是this
+	//静态的同步方法的锁对象是该类的字节码对象
+	public static synchronized void print1() {						//同步方法只需要在方法上加上synchronized关键字即可
+			System.out.print("y");
+			System.out.print("i");
+			System.out.print("n");
+			System.out.print("g");
+			System.out.print("x");
+			System.out.print("s");
+			System.out.println();
+		
+	}
+	public static void print2() {
+		synchronized (Printer.class) {
+			System.out.print(".");
+			System.out.print("c");
+			System.out.print("o");
+			System.out.print("m");
+			System.out.println();
+		}
+		
+	}
+}
+
+class Demo{}
+
+```
