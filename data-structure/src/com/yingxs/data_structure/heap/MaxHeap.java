@@ -49,13 +49,14 @@ public class MaxHeap<E extends Comparable<E>> {
 	}
 	
 	/**
-	 * 向堆中添加元素
+	 * 向堆中添加元素		O(logn)
 	 * @param e
 	 */
 	public void add(E e){
 		data.addLast(e);
 		siftUp(data.getSize()-1);
 	}
+	
 	/**
 	 * 元素上浮
 	 * @param k 上浮的元素索引
@@ -67,5 +68,44 @@ public class MaxHeap<E extends Comparable<E>> {
 		}
 	}
 	
+	/**
+	 * 返回最大元素
+	 * @return
+	 */
+	public E finMax(){
+		if(data.getSize() == 0)
+			throw new IllegalArgumentException("Can not finMax when heap is empty.");
+		return data.get(0);
+	}
+	
+	/**
+	 * 取出最大元素		O(logn)
+	 * @return
+	 */
+	public E extractMax(){
+		
+		E ret = finMax();
+		data.swap(0,data.getSize()-1);
+		data.removeLast();
+		siftDown(0);
+		return ret;
+	}
+	
+	/**
+	 * 元素下沉
+	 * @param k
+	 */
+	private void siftDown(int k){
+		while(leftChild(k) < data.getSize()){
+			int j = leftChild(k);
+			if( j + 1 < data.getSize() && data.get(j+1).compareTo(data.get(j)) > 0)
+				j=rightChild(k);
+			//data[j]是leftChild和rightChild中的最大值
+			if(data.get(k).compareTo(data.get(j)) >= 0)
+				break;
+			data.swap(k, j);
+			k=j;
+		}
+	}
 	
 }
