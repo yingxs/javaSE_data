@@ -133,3 +133,230 @@ new Thread(new Runnable(){							//1.将Runnable的子类对象传递给Thread�
 }).start();											//4.开启线程
 		
 ```
+
+```
+//获取和设置名字
+new Thread("芙蓉姐姐"){										//1.继承Thread类
+	@Override											
+	public void run() {								//2.重写run方法
+			System.out.println(this.getName()+"...aaaaaa");
+	}
+}.start();											//4.开启线程
+
+
+new Thread("fengjie"){										//1.继承Thread类
+	@Override											
+	public void run() {								//2.重写run方法
+			System.out.println(this.getName()+"...bbb");
+	}
+}.start();										//4.开启线程
+```
+
+
+### 获取当前线程对象
+
+```
+new Thread(){										//1.继承Thread类
+	@Override											
+	public void run() {								//2.重写run方法
+			System.out.println(this.getName()+"...aaaaaa");
+	}
+}.start();											//4.开启线程
+
+
+new Thread(new Runnable(){							//1.将Runnable的子类对象传递给Thread构造方法
+	public void run() {								//2.重写run方法
+			System.out.println(Thread.currentThread().getName()+"...bb");		
+	}
+}).start();											//4.开启线程
+Thread.currentThread().setName("我是主线程");
+System.out.println(Thread.currentThread().getName());	
+```
+
+### 休眠线程
+```
+//在主线程中
+public class Test {
+	
+	public static void main(String[] args) throws InterruptedException  {
+		
+		for(int i = 20;i>=0;i--){
+			Thread.sleep(1000);
+			System.out.println("倒计时第"+i+"秒");
+		}
+		
+	}
+}
+```
+```
+new Thread(){
+	@Override
+	public void run() {
+		for(int i = 0;i<10;i++){
+			try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+			System.out.println(getName()+"...aaaaaaa");
+		}
+	}
+}.start();
+
+new Thread(){
+	@Override
+	public void run() {
+		for(int i = 0;i<10;i++){
+			try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+			System.out.println(getName()+"...bb");
+		}
+	}
+}.start();
+/**运行结果
+ *  Thread-0...aaaaaaa
+	Thread-1...bb
+	Thread-1...bb
+	Thread-0...aaaaaaa
+	Thread-0...aaaaaaa
+	Thread-1...bb
+	Thread-1...bb
+	Thread-0...aaaaaaa
+	Thread-1...bb
+	Thread-0...aaaaaaa
+	Thread-0...aaaaaaa
+	Thread-1...bb
+	Thread-0...aaaaaaa
+	Thread-1...bb
+	Thread-1...bb
+	Thread-0...aaaaaaa
+	Thread-0...aaaaaaa
+	Thread-1...bb
+	Thread-0...aaaaaaa
+	Thread-1...bb
+
+ */
+		
+```
+### 守护线程
+> setDaemon(),设置一个线程为守护线程，该线程不会单独执行，当其他非守护线程都执行结束后，自动退出
+
+```
+Thread t1 = new Thread(){
+	public void run() {
+		for(int i = 0;i<2;i++){
+			System.out.println(getName()+"...aaaaaaa");
+		}
+	}
+};
+
+Thread t2 = new Thread(){
+	public void run() {
+		for(int i = 0;i<500;i++){
+			System.out.println(getName()+"...bb "+i);
+		}
+	}
+};
+
+
+t2.setDaemon(true);					//当传入true就是意味着设置为守护线程
+									//当其他线程(t1)结束时,该线程自动退出
+
+t1.start();
+t2.start();
+```
+
+### 加入线程
+* join()，当前线程暂停，等待指定的线程执行结束后，当前线程再继续
+* join(int),可以等待指定的毫秒之后继续
+```
+
+ final Thread t1 = new Thread("线程1"){
+	public void run() {
+		for(int i = 0;i<10;i++){
+			System.out.println(getName()+"...aaaaaaa "+i);
+		}
+	}
+};
+
+//匿名内部类在使用它所在的方法中的 局部变量时，该变量必须要用final修饰
+Thread t2 = new Thread("线程2"){
+	public void run() {
+		for(int i = 0;i<10;i++){
+			if(i==2){
+				try {
+					//t1.join();							//插队
+					t1.join(1);							//指定插队的事件，过了指定的事件后，两条线程交替执行
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+			}
+			System.out.println(getName()+"...bb "+i);
+		}
+	}
+};
+
+
+t1.start();
+t2.start();
+```
+
+### 礼让线程
+> 效果不明显，了解
+```
+public class Test {
+	
+	public static void main(String[] args) throws InterruptedException  {
+		
+		new MyThread().start();
+		new MyThread().start();
+		
+	}
+	
+}
+
+
+class MyThread extends Thread {
+	@Override
+	public void run() {
+		for(int i = 1;i<=10;i++){
+			if(i%10==0){
+				Thread.yield();			//让出CPU
+			}
+			System.out.println(getName()+"...... "+i);
+		}
+	}
+}
+```
+
+### 线程优先级
+```
+Thread t1 = new Thread(){
+	public void run() {
+		for(int i = 0 ;i < 1000 ;i++){
+			System.out.println(getName()+"....aaaa");
+		}
+	};
+};
+
+Thread t2 = new Thread(){
+	public void run() {
+		for(int i = 0 ;i < 1000 ;i++){
+			System.out.println(getName()+"....bbb");
+		}
+	};
+};
+
+//t1.setPriority(10);							//设置最大的线程优先级
+//t2.setPriority(1);							//设置最小的线程优先级
+
+t1.setPriority(Thread.MIN_PRIORITY);		//设置最小的线程优先级
+t2.setPriority(Thread.MAX_PRIORITY);		//设置最大的线程优先级
+
+
+t1.start();
+t2.start();
+```
