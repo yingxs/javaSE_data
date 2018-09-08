@@ -144,3 +144,12 @@ removeLast 			O(n)
 *  普通线性结构		   O(1)     					O(n)
 *  顺序线性结构		   O(n)							O(1)
 *      堆			   O(logn)						O(logn)
+
+
+### 二叉堆
+> 二叉堆是一颗完全二叉树，堆中的某个节点的值总是不大于其父节点的值，因此根元素往往是最大的元素，称为最大堆，相应的可以定义最小堆。
+
+* 完全二叉树：把元素顺序排列成树的形状
+* 用数组存储二叉堆
+![](http://yingxs.com/img/erchadui_array.png)
+![](http://yingxs.com/img/erchadui_array2.png)
