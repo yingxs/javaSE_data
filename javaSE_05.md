@@ -583,3 +583,49 @@ class Ticket extends Thread {
 }
 
 ```
+
+```
+public class Test {
+	
+	public static void main(String[] args) throws InterruptedException  {
+		MyTicket mt = new MyTicket();
+		new Thread(mt).start();
+		new Thread(mt).start();
+		new Thread(mt).start();
+		new Thread(mt).start();
+	}
+	
+}
+
+class MyTicket implements Runnable { 
+
+	private int ticket = 1000;
+	
+	public void run() {
+		while(true){
+			synchronized (this) {
+				
+					if(ticket <= 0){
+						break;
+					}
+					try {
+						Thread.sleep(10);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+					System.out.println(Thread.currentThread().getName()+"这是第"+ ticket-- +"号票");
+				}
+		}
+	}
+}
+
+```
+
+### 死锁
+> 同步代码块不要嵌套
+
+
+### 线程安全类回顾
+* Vector是线程安全的，ArrayList是线程不安全的
+* StringBuffer实现是线程安全的，StringBulider是线程不安全的
+* Hashtable是线程安全的，HashMap是线程不安全的
