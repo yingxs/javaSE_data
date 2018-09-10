@@ -1,6 +1,7 @@
 package com.yingxs.data_structure.array.test;
 
 import com.yingxs.data_structure.array.Array;
+import com.yingxs.data_structure.heap.MaxHeap;
 
 public class Test {
 
@@ -9,6 +10,8 @@ public class Test {
 //		test2();
 			
 	}
+	
+	
 	
 	public static void test1(){
 		Array<Integer> arr = new Array<Integer>(10);

@@ -153,3 +153,13 @@ removeLast 			O(n)
 * 用数组存储二叉堆
 ![](http://yingxs.com/img/erchadui_array.png)
 ![](http://yingxs.com/img/erchadui_array2.png)
+
+
+#### replace
+> 取出最大元素后，放入一个新元素
+* 实现1：可以先extractMax，再add，两次O(logn)的操作
+* 实现2：可以直接将堆顶的元素替换后再sift Down，这是一次O(logn)的操作
+
+#### Heapify的事件复杂度
+* 将n个元素逐个插入到一个空堆中，算法复杂度是O(nlogn)
+* Heapify的过程算法复杂度为O(n)

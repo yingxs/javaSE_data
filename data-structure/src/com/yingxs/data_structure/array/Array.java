@@ -26,6 +26,15 @@ public class Array<E> {
 		this.data = (E[]) new Object[10];
 		this.size = 0;
 	}
+	
+	
+	public Array(E[] arr){
+		data = (E[])new Object[arr.length];
+		for(int i = 0 ; i<arr.length ;i ++)
+			data[i] = arr[i];
+		size = arr.length;
+			
+	}
 
 
 	/**
@@ -127,7 +136,7 @@ public class Array<E> {
 	 * @param index 要修改的元素的索引
 	 * @param e	该修改为的元素
 	 */
-	void set(int index,E e){
+	public void set(int index,E e){
 		if(index < 0 || index >= size)
 			throw new IllegalArgumentException("Get failed.Index is illegal");
 		data[index] = e;
