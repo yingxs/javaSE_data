@@ -1,5 +1,6 @@
 package com.yingxs.data_structure.queue.test;
 
+import java.util.List;
 import java.util.Random;
 
 import com.yingxs.data_structure.queue.ArrayQueue;
@@ -11,8 +12,17 @@ public class Test {
 	public static void main(String[] args) {
 //		test1();
 //		test2();
-		test3();
+//		test3();
 //		test4();
+		test5();
+		
+	}
+	
+	private static void test5() {
+		int[] arr = {1,2,3,4,5,6,1,6,6,2,2,1,4};
+		
+		List<Integer> list = Solution.topKFrequent(arr, 4);
+		System.out.println(list);
 	}
 	
 	
