@@ -2,11 +2,11 @@ package com.yingxs.data_structure.queue;
 
 import com.yingxs.data_structure.heap.MaxHeap;
 
-public class PrioityQueue<E extends Comparable<E>> implements Queue<E> {
+public class PriorityQueue<E extends Comparable<E>> implements Queue<E> {
 	
 	private MaxHeap<E> maxHeap;
 	
-	public PrioityQueue(){
+	public PriorityQueue(){
 		maxHeap = new MaxHeap<E>();
 	}
 	
