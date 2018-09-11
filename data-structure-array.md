@@ -177,3 +177,5 @@ removeLast 			O(n)
 
 * 为什么要使用线段树
 	* 对于给定区间，更新区间中一个元素或者一个区间的值，查询一个区间[i,j]的最大值，最小值，或者区间数字和 
+* 数组实现创建线段树
+![](http://yingxs.com/img/buildBegTree.png)
