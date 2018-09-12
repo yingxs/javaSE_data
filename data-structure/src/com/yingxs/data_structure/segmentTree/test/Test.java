@@ -12,6 +12,11 @@ public class Test {
 			};
 		});
 		
-		System.out.println(segTree);
+//		System.out.println(segTree);
+		
+		System.out.println(segTree.query(0, 3));
+		System.out.println(segTree.query(2, 5));
+		System.out.println(segTree.query(0, 5));
+		
 	}
 }

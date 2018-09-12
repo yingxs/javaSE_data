@@ -10,7 +10,7 @@ import java.util.TreeMap;
 public class Solution2 {
 	
 	public static List<Integer> topKFrequent(int[] nums,int k){
-		TreeMap<Integer,Integer> map = new TreeMap<Integer,Integer>();
+		final TreeMap<Integer,Integer> map = new TreeMap<Integer,Integer>();
 		for(int num:nums){
 			if(map.containsKey(num))
 				map.put(num, map.get(num) + 1);
