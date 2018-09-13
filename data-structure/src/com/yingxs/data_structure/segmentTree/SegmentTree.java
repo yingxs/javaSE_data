@@ -80,19 +80,15 @@ public class SegmentTree<E> {
 		
 		if(l == queryL && r == queryR)
 			return tree[treeIndex];
-		
 		int mid =  l + ( r - l )/2;
 		int leftTreeIndex = leftChild(treeIndex);
 		int rightTreeIndex = rightChild(treeIndex);
-		
 		if(queryL >= mid + 1)
 			return query(rightTreeIndex,mid+1,r,queryL,queryR);
 		else if(queryR <= mid)
 			return query(leftTreeIndex,l,mid,queryL,queryR);
-		
 		E leftResult = query(leftTreeIndex,l,mid,queryL,mid);
 		E rightResult = query(rightTreeIndex,mid+1,r,mid+1,queryR);
-		
 		return merger.merge(leftResult, rightResult);
 		
 		
