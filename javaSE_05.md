@@ -691,3 +691,28 @@ class Singleton{
 #### 区别
 * 1.饿汉式是空间换时间，懒汉式是时间换空间
 * 2.多线程访问时，饿汉式不会创建多个对象，而懒汉式有可能会创建多个对象
+* Runtime就是一个单例类，可执行字符串(DOS)命令
+
+### Timer 定时器
+```
+public class Test {
+	public static void main(String[] args) throws IOException, InterruptedException {
+		Timer t = new Timer();
+		
+		//t.schedule(new MyTimerTask(), new Date(118,8,16,22,25,40));	//指定时间执行指定任务,第一个参数是任务，第二个参数是时间，第三参数是间隔时长(毫秒值)
+		t.schedule(new MyTimerTask(), new Date(118,8,16,22,25,40),3000);//指定时间执行指定任务，并在第一次执行完毕后，间隔执行
+		while(true) {
+			Thread.sleep(1000);
+			System.out.println(new Date());
+		}
+	}
+}
+
+class MyTimerTask extends TimerTask {
+	@Override
+	public void run() {
+		System.out.println("背单词");
+	}
+}
+
+```
