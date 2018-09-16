@@ -629,3 +629,65 @@ class MyTicket implements Runnable {
 * Vector是线程安全的，ArrayList是线程不安全的
 * StringBuffer实现是线程安全的，StringBulider是线程不安全的
 * Hashtable是线程安全的，HashMap是线程不安全的
+
+
+
+### 单例设计模式
+> 单例设计模式：保证内存中只有只有一个对象
+
+#### 饿汉式
+* 1.私有构造方法，在外部不能访问该类构造
+* 2.创建本类私有对象
+* 3.对外提供get方法
+```
+//饿汉式
+public class Test {
+	public static void main(String[] args) {
+		Singleton s1 = Singleton.getInstance();
+		Singleton s2 = Singleton.getInstance();
+		System.out.println(s1==s2);
+	}
+}
+
+class Singleton{
+	//1.私有构造方法，在外部不能访问该类构造
+	private Singleton(){}
+	//2.创建本类私有对象
+	private static Singleton s = new Singleton();
+	//3.对外提供get方法
+	public static Singleton getInstance() {
+		return s;
+	}
+}
+```
+```
+//懒汉式，多线程时有安全隐患
+class Singleton{
+	//1.私有构造方法，在外部不能访问该类构造
+	private Singleton(){}
+	//2.声明一个引用
+	private static Singleton s ;
+	//3.对外提供get方法
+	public static Singleton getInstance() {
+		if(s == null) {
+			s = new Singleton();
+		}
+		return s;
+	}
+}
+
+```
+
+```
+//第三种
+class Singleton{
+	//1.私有构造方法，在外部不能访问该类构造
+	private Singleton(){}
+	//2.声明一个引用
+	public final static Singleton s = new Singleton() ;
+}
+```
+
+#### 区别
+* 1.饿汉式是空间换时间，懒汉式是时间换空间
+* 2.多线程访问时，饿汉式不会创建多个对象，而懒汉式有可能会创建多个对象
