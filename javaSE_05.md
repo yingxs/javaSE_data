@@ -1021,3 +1021,37 @@ class Printer3 {
 	}
 }
 ```
+
+## 线程组
+* Java中使用ThreadGroup来表示线程组，它可以对一批线程进行分类管理，Java允许程序直接对线程组进行控制
+* 默认情况下，所有的线程都属于主线程组
+	* public final ThreadGroup getThreadGroup()	通过线程对象获取他所属于的组
+	* public final String getName()			通过线程组对象获取组名
+* 给线程设置分组
+	* 1.ThreadGroup(String name) 创建线程组对象并给其复制名字
+	* 2.创建线程对象
+	* 3.Thread(ThreadGroup group,Runnable target,String name)
+	* 4.设置整组的优先级或者守护线程   
+	
+```
+MyRunnable mr = new MyRunnable();
+Thread t1 = new Thread(mr, "张三");
+Thread t2 = new Thread(mr, "李四");
+
+ThreadGroup tg1 = t1.getThreadGroup();
+ThreadGroup tg2 = t2.getThreadGroup();
+System.out.println(tg1.getName());		//main
+System.out.println(tg2.getName());		//main
+```
+
+```
+ThreadGroup tg = new ThreadGroup("我是一个新的线程组");		//创建新的线程组
+MyRunnable mr = new MyRunnable();						//创建Rnnable的子类对象
+
+Thread t1 = new Thread(tg,mr,"张三");						//将线程放在组中
+Thread t2 = new Thread(tg,mr,"李四");
+
+System.out.println(t1.getThreadGroup().getName());
+System.out.println(t2.getThreadGroup().getName());
+
+```
