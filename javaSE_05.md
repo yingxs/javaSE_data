@@ -716,3 +716,194 @@ class MyTimerTask extends TimerTask {
 }
 
 ```
+
+
+## 线程通信
+### 两个线程间的通信
+* 1.什么时候需要通信
+	* 多个线程并发执行时，在默认情况下CPU是随机谢欢线程的
+	* 如果我们希望他们有规律的执行，就可以使用线程通信，例如每个线程执行一次打印
+* 2.怎么通信
+	* 如果希望线程等待，就调用wait()
+	* 如果希望唤醒等待的线程，就调用notify()
+	* 这两个方法必须在同步代码中执行，并且使用同步锁对象来调用  
+```
+public class Demo1_Notify {
+	public static void main(String[] args) {
+		final Printer p = new Printer();
+		
+		new Thread() {
+			public void run() {
+				while(true) {
+					try {
+						p.print1();
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+				
+			}
+		}.start();
+		new Thread() {
+			public void run() {
+				while(true) {
+					try {
+						p.print2();
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+			}
+		}.start();
+	}
+	
+}
+
+class Printer {
+	private int flag = 1;
+	//非静态的同步方法锁对象是this
+	//静态的同步方法的锁对象是该类的字节码对象
+	public  void print1() throws Exception {						//同步方法只需要在方法上加上synchronized关键字即可
+			synchronized (this) {
+				if(flag != 1) {
+					this.wait();
+				}
+				System.out.print("y");
+				System.out.print("i");
+				System.out.print("n");
+				System.out.print("g");
+				System.out.print("x");
+				System.out.print("s");
+				System.out.println();
+				flag = 2;
+				this.notify();
+			}
+	}
+	public  void print2() throws Exception {
+		synchronized (this) {
+			if( flag != 2 ) {
+				this.wait();
+			}
+			System.out.print(".");
+			System.out.print("c");
+			System.out.print("o");
+			System.out.print("m");
+			System.out.println();
+			flag = 1;
+			this.notify();
+		}
+		
+	}
+}
+```
+
+### 三个线程间通信
+```
+public class Demo2_NotifyAll {
+	public static void main(String[] args) {
+		final Printer2 p = new Printer2();
+		
+		new Thread() {
+			public void run() {
+				while(true) {
+					try {
+						p.print1();
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+				
+			}
+		}.start();
+		new Thread() {
+			public void run() {
+				while(true) {
+					try {
+						p.print2();
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+			}
+		}.start();
+		new Thread() {
+			public void run() {
+				while(true) {
+					try {
+						p.print3();
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+			}
+		}.start();
+		
+		
+	}
+}
+class Printer2 {
+	private int flag = 1;
+	//非静态的同步方法锁对象是this
+	//静态的同步方法的锁对象是该类的字节码对象
+	public  void print1() throws Exception {						//同步方法只需要在方法上加上synchronized关键字即可
+			synchronized (this) {
+				while(flag != 1) {
+					this.wait();
+				}
+				System.out.print("y");
+				System.out.print("i");
+				System.out.print("n");
+				System.out.print("g");
+				System.out.print("x");
+				System.out.print("s");
+				System.out.println();
+				flag = 2;
+				this.notifyAll();
+			}
+	}
+	public  void print2() throws Exception {
+		synchronized (this) {
+			while( flag != 2 ) {
+				this.wait();
+			}
+			System.out.print(".");
+			System.out.print("c");
+			System.out.print("o");
+			System.out.print("m");
+			System.out.println();
+			flag = 3;
+			this.notifyAll();
+		}
+		
+	}
+	
+	public  void print3() throws Exception {
+		synchronized (this) {
+			while( flag != 3 ) {
+				this.wait();
+			}
+			System.out.print("w");
+			System.out.print("w");
+			System.out.print("w");
+			System.out.println();
+			flag = 1;
+			this.notifyAll();
+		}
+		
+	}
+}
+```
+
+* 1.在同步方法中，用哪个对象锁就用哪个对象调用wait方法
+* 2.为什么wait方法和notify方法定义在Object类中
+	* 锁对象可以是任意对象，Object是所有对象的超类
+* 3.sleep和wait方法的区别
+	* sleep方法必须传入参数，参数为时间，时间到了自动醒来
+	* wait方法 可传参可不传参，传入参数在参数的时间后的鞥带，不传入参数就是直接等待
+	* sleep方法在同步函数或同步代码块中不释放锁
+	* wait方法在同步函数和同步代码块中释放锁
