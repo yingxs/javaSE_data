@@ -907,3 +907,117 @@ class Printer2 {
 	* wait方法 可传参可不传参，传入参数在参数的时间后的鞥带，不传入参数就是直接等待
 	* sleep方法在同步函数或同步代码块中不释放锁
 	* wait方法在同步函数和同步代码块中释放锁
+	
+
+### 互斥锁(JDK1.5)
+#### 同步
+* 使用RenntrantLock类的lock()和unlock()方法进行同步
+#### 通信
+* 使用RenntrantLock类的newCondition()方法可以获取Condition对象
+* 需要等待的时候使用Condition的await()方法，唤醒的时候用signal()方法
+* 不同的线程使用不同的Condition,这样就能区分唤醒的时候找哪个线程了
+```
+public class Demo3_RenntrantLock {
+	public static void main(String[] args) {
+		final Printer3 p = new Printer3();
+		
+		new Thread() {
+			public void run() {
+				while(true) {
+					try {
+						p.print1();
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+				
+			}
+		}.start();
+		new Thread() {
+			public void run() {
+				while(true) {
+					try {
+						p.print2();
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+			}
+		}.start();
+		new Thread() {
+			public void run() {
+				while(true) {
+					try {
+						p.print3();
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+			}
+		}.start();
+		
+		
+	}
+}
+
+
+class Printer3 {
+	private ReentrantLock r = new ReentrantLock();
+	private Condition c1 = r.newCondition();
+	private Condition c2 = r.newCondition();
+	private Condition c3 = r.newCondition();
+	
+	private int flag = 1;
+	//非静态的同步方法锁对象是this
+	//静态的同步方法的锁对象是该类的字节码对象
+	public  void print1() throws Exception {						//同步方法只需要在方法上加上synchronized关键字即可
+			r.lock();//获取锁
+				if(flag != 1) {
+					c1.await();
+				}
+				System.out.print("y");
+				System.out.print("i");
+				System.out.print("n");
+				System.out.print("g");
+				System.out.print("x");
+				System.out.print("s");
+				System.out.println();
+				flag = 2;
+				c2.signal();
+			r.unlock();//释放锁
+	}
+	public  void print2() throws Exception {
+		r.lock();//获取锁
+			if( flag != 2 ) {
+				c2.await();
+			}
+			System.out.print(".");
+			System.out.print("c");
+			System.out.print("o");
+			System.out.print("m");
+			System.out.println();
+			flag = 3;
+			c3.signal();
+		r.unlock();//释放锁
+		
+	}
+	
+	public  void print3() throws Exception {
+		r.lock();//获取锁
+			while( flag != 3 ) {
+				c3.await();
+			}
+			System.out.print("w");
+			System.out.print("w");
+			System.out.print("w");
+			System.out.println();
+			flag = 1;
+			c1.signal();
+		r.unlock();//释放锁
+		
+	}
+}
+```
