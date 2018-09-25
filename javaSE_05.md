@@ -1055,3 +1055,12 @@ System.out.println(t1.getThreadGroup().getName());
 System.out.println(t2.getThreadGroup().getName());
 
 ```
+
+### 线程的物种状态
+* 线程的生命周期
+	* 新建：创建线程对象
+	* 就绪：线程对象已经启动了，但是没有获取到CPU的执行权
+	* 运行：获取到CPU的执行权
+	* 阻塞：没有CPU的执行权，回到就绪状态
+	* 死亡：程序运行完毕，线程消亡
+	![](http://yingxs.com/img/threa_more.png) 
