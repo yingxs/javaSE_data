@@ -183,3 +183,5 @@ removeLast 			O(n)
 
 ## 并查集
 > 连接问题，对于一组数据主要支持两个操作
+
+![](http://yingxs.com/img/quickunion.png)
