@@ -3,10 +3,11 @@ package com.yingxs.data_structure.unionFind.test;
 import java.util.Random;
 
 import com.yingxs.data_structure.unionFind.UF;
-import com.yingxs.data_structure.unionFind.UnionFind1;
-import com.yingxs.data_structure.unionFind.UnionFind2;
 import com.yingxs.data_structure.unionFind.UnionFind3;
 import com.yingxs.data_structure.unionFind.UnionFind4;
+import com.yingxs.data_structure.unionFind.UnionFind5;
+import com.yingxs.data_structure.unionFind.UnionFind6;
+
 
 public class Test {
 
@@ -53,6 +54,15 @@ public class Test {
 		
 		UnionFind4 uf4 = new UnionFind4(size);
 		System.out.println("UnionFind4 : "+testUF(uf4,m)+" s");
+		
+		System.out.println();
+		
+		UnionFind5 uf5 = new UnionFind5(size);
+		System.out.println("UnionFind5 : "+testUF(uf5,m)+" s");
+		System.out.println();
+		
+		UnionFind6 uf6 = new UnionFind6(size);
+		System.out.println("UnionFind6 : "+testUF(uf6,m)+" s");
 		
 		
 		
