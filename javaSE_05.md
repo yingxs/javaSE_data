@@ -1064,3 +1064,74 @@ System.out.println(t2.getThreadGroup().getName());
 	* 阻塞：没有CPU的执行权，回到就绪状态
 	* 死亡：程序运行完毕，线程消亡
 	![](http://yingxs.com/img/threa_more.png) 
+
+
+### 线程池
+> JDK5新增了一个Executors工厂类来产生线程池，有如下几个方法
+* public static ExecutorService newFixedThreadPool(int nThreads)
+* public static ExecutorService newSingleThreadExecutor()
+	* 这些方法返回值是一个ExecutorService，该线程表示一个线程池对象，可以执行Runnable对象或者Callable对象代表的线程，提供了如下方法
+		* Futurn<?> submit(Runnable task)
+		* <T> Futurn<T> submit(Callable<T> task)
+```
+//简单的线程池
+	public static void main(String[] args) {
+		ExecutorService pool = Executors.newFixedThreadPool(2);//创建线程池
+		pool.submit(new MyRunnable());	//将线程放进池子里并执行
+		pool.submit(new MyRunnable());
+//		pool.shutdown();			//关闭线程池
+	}
+	
+}
+
+class MyRunnable implements Runnable{
+	@Override
+	public void run() {
+		for(int i = 0 ;i < 1000 ;i++) {
+			System.out.println(Thread.currentThread().getName()+"..."+i);
+		}
+	}
+	
+}
+```
+
+#### 线程池&&多线程实现的第三种方式
+```
+public class Demo6_Callable {
+
+	public static void main(String[] args) throws InterruptedException, ExecutionException {
+		ExecutorService pool = Executors.newFixedThreadPool(2);//创建线程池
+		Future<Integer> f1 = pool.submit(new MyCallable(100));	//将线程放进池子里并执行
+		Future<Integer> f2 = pool.submit(new MyCallable(50));
+		
+		System.out.println(f1.get());
+		System.out.println(f2.get());
+		
+		pool.shutdown();			//关闭线程池
+	}
+}
+
+class MyCallable implements Callable<Integer>{
+
+	private int num;
+	public MyCallable(int num) {
+		this.num = num;
+	}
+	@Override
+	public Integer call() throws Exception {
+		int sum = 0;
+		for(int i = 1 ;i <= num ; i++) {
+			sum += i;
+		}
+		return sum;
+	}
+}
+```
+
+### 简单工厂模式
+> 简单工厂模式又叫静态方法模式，它定义一个具体的类负责创建一些类的实例
+
+* 优点
+	* 客户端不需要负责对象的创建，从而明确了个各类的职责
+* 缺点
+	* 这个静态工厂类负责所有对象的创建，如果有新的对象增加，或者某些对象的创建方式不同，就需要不断的修改工厂类，不利于后期的维护
