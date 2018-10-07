@@ -129,3 +129,43 @@ class MyInvocationHandler implements InvocationHandler{
 	
 }
 ```
+
+### 模板设计模式
+> 模板方法模式就是定义一个算法的股价，而将具体的算法延迟到子类中来实现
+
+* 优点和缺点
+	* 优点
+		* 使用模板方法模式，在定义算法骨架的同时，可以很灵活的实现具体的算法，满足用户灵活多变的需求
+	* 缺点
+		* 如果算法骨架有修改的话，则需要修改抽象类
+
+```
+public class Test {
+	public static void main(String[] args) {
+		long len = new Demo().getTime();
+		System.out.println(len);
+	}
+}
+
+abstract class GetTime{
+	public final long getTime() {
+		long start = System.currentTimeMillis();
+		code();
+		long end = System.currentTimeMillis();
+		return end - start;
+	}
+	
+	public abstract void code();
+}
+
+class Demo extends GetTime{
+
+	@Override
+	public void code() {
+		for(int i = 0 ; i < 1000 ; i++) {
+			System.out.println("...");
+		}
+	}
+	
+}
+```
