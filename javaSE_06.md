@@ -219,3 +219,84 @@ enum Week3 {
 }
 
 ```
+
+* 枚举注意事项
+	* 定义枚举要用关键字enum
+	* 所有枚举类都是Enum的子类
+	* 枚举类的第一行必须是枚举项，最后一个枚举项的分号是可以省略的，但是如果枚举项后面有其他代码，就不能省略，建议不省略
+	* 枚举类可以有构造器，但是必须是priavte默认也是private
+	* 枚举类可以有抽象方法，但是枚举项必须重写该方法
+	* 枚举在switch中的使用
+	```
+	
+	Week3 mon = Week3.MON;
+	switch (mon){
+		case MON:
+			System.out.println("星期1");
+			break;
+		case TUE:
+			System.out.println("星期2");
+			break;
+	}
+		
+	```
+* 枚举常见方法
+	* int ordinal() 返回该对象枚举值在枚举项中的序数，从0开始
+	* int compareTo() 比较的是编号
+	* String name()  枚举变量名称	
+	* String toString() 
+	* T valueof(Class<T> type,string name)
+	* values()  获取所有枚举项
+	```
+		Week2 mon = Week2.valueOf(Week.class,"MON");
+		System.out.println(mon);
+	```
+	```
+	Week2[] arr = Week2.values();
+	for (Week2 week2 : arr) {
+		System.out.println(week2);
+	}
+	```
+
+### JDK7新特性
+* 二进制字面量
+```
+System.out.println(0b110);
+```
+* 数字字面量可以出现下划线
+```
+//两者等效
+System.out.println(1_000_000);
+System.out.println(1000000);
+```
+* 异常多个catch合并,每个异常用 | 分隔
+* try-with-resourcees 1.7的标准异常处理
+
+### JDK1.8新特性
+* 接口中可以定义有方法体的方法，如果是非静态的，必须用default修饰，如果是静态的就不用了
+```
+public class Test{
+	public static void main(String[] args) {
+			
+			new Demo().print();
+			
+			Inter.method();
+	}
+	
+}
+
+interface Inter{
+	public default void print() {
+		System.out.println("hello World");
+	}
+	
+	public static void method() {
+		System.out.println("static method");
+	}
+}
+
+class Demo implements Inter {
+	
+}
+```
+* 匿名内部类访问局部变量时不用final修饰
