@@ -169,3 +169,53 @@ class Demo extends GetTime{
 	
 }
 ```
+
+### 枚举
+```
+public enum Week {
+	 
+	MON,TUE,WED
+
+}
+enum Week2 {
+	
+	MON("星期一"),TUE("星期二"),WED("星期三");
+	
+	private String name;
+	private Week2(String name) {
+		this.name = name;
+	}
+	
+	public String getName() {
+		return name;
+	}
+}
+
+enum Week3 {
+	
+	MON("星期一"){
+		public void show() {
+			System.out.println("星期一");	
+		}
+		
+	},TUE("星期二"){
+		public void show() {
+			System.out.println("星期二");	
+		}
+		
+	},WED("星期三"){
+		public void show() {
+			System.out.println("星期三");	
+		}
+		
+	};
+	
+	private String name;
+	private Week3(String name) {
+		this.name = name;
+	}
+	
+	public abstract void show();
+}
+
+```
