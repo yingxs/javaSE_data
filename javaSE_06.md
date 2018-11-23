@@ -37,7 +37,7 @@
 ### 反射
 > 反射的核心是先拿到该类的字节码对象
 
-![](http:/yingxs.com/img/java_fanshe01.png)
+![](http:/md.yingxs.com/java_fanshe01.png)
 
 * clazz.newInstance()  使用空参构造创建对象
 

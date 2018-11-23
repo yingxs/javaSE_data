@@ -1063,7 +1063,7 @@ System.out.println(t2.getThreadGroup().getName());
 	* 运行：获取到CPU的执行权
 	* 阻塞：没有CPU的执行权，回到就绪状态
 	* 死亡：程序运行完毕，线程消亡
-	![](http://yingxs.com/img/threa_more.png) 
+	![](http://md.yingxs.com/threa_more.png) 
 
 
 ### 线程池

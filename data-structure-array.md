@@ -151,8 +151,8 @@ removeLast 			O(n)
 
 * 完全二叉树：把元素顺序排列成树的形状
 * 用数组存储二叉堆
-![](http://yingxs.com/img/erchadui_array.png)
-![](http://yingxs.com/img/erchadui_array2.png)
+![](http://md.yingxs.com/erchadui_array.png)
+![](http://md.yingxs.com/erchadui_array2.png)
 
 
 #### replace
@@ -178,10 +178,10 @@ removeLast 			O(n)
 * 为什么要使用线段树
 	* 对于给定区间，更新区间中一个元素或者一个区间的值，查询一个区间[i,j]的最大值，最小值，或者区间数字和 
 * 数组实现创建线段树
-![](http://yingxs.com/img/buildBegTree.png)
+![](http://md.yingxs.com/buildBegTree.png)
 
 
 ## 并查集
 > 连接问题，对于一组数据主要支持两个操作
 
-![](http://yingxs.com/img/quickunion.png)
+![](http://md.yingxs.com/quickunion.png)

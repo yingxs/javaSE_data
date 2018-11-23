@@ -10,7 +10,7 @@
 	* Set 无序(存和取的顺序不 一致)，无索引，不可以存储重复
 		* HashSet 哈希算法
 		* TreeSet二叉树算法
-![](http://www.yingxs.com/img/collection01.png)
+![](http://md.yingxs.com/collection01.png)
 
 ## Collection
 ### 常用方法
@@ -194,7 +194,7 @@
 > 数组转换城集合
 > 数组转换成集合虽然不能增加或减少元素，但是可以用集合的思想去操作数组，也就是说可以使用集合中其他方法
 > 将数组传换成集合，数组必须是引用数据类型。基本数据类型的数组转换成集合，会将整个数组当做一个对象，因为集合中只能存储引用数据类型
-![](http://www.yingxs.com/img/aslist.png)
+![](http://md.yingxs.com/aslist.png)
 
 
 ## 集合转数组
@@ -202,7 +202,7 @@
 * Object[] toArray()
 * <T> T[]  toArray(T[] a)
 * 当集合转换成数组时，数组长度如果是小于或等于集合的size时，转换后的数组长度等于集合的size，如果数组的长度大于size，分配的数组长度就和你指定的长度一样
-![](http://www.yingxs.com/img/toArray.png)
+![](http://md.yingxs.com/toArray.png)
 
 
 ## set
@@ -233,15 +233,15 @@
 ### TreeSet集合排序原理
 > 在TreSet集合中如何存储元素取决于compareTo()方法返回值,小的存储在左边(负数),大的存储在右边(正数)，相等就不存(0)
 
-![](http://www.yingxs.com/img/TreeSet.png)
+![](http://md.yingxs.com/TreeSet.png)
 
 ----------
 
-![](http://www.yingxs.com/img/TreeSet2.png)
+![](http://md.yingxs.com/TreeSet2.png)
 
 ----------
 
-![](http://www.yingxs.co m/img/TreeSet3.png)
+![](http://md.yingxs.com/TreeSet3.png)
 
 
 

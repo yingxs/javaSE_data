@@ -156,9 +156,9 @@ short ss=1;ss+=1;		//正常   s = (short)(s+1);
 
 ### static关键字
 * 未加静态
-![](http://yingxs.com/img/javase_static1.png)
+![](http://md.yingxs.com/javase_static1.png)
 * 加静态
-![](http://yingxs.com/img/javase_static2.png)
+![](http://md.yingxs.com/javase_static2.png)
 
 ### static关键字的特点
 * 随着类的加载而加载
